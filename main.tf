@@ -1,7 +1,7 @@
 module "prod" {
-  source = "../modules/qrrs"
+  source = "modules/qrrs"
   environment = {
-    name = "prod"
+    name = "qrrs"
     network_prefix = "10.0"
   }
   asg_min = 1
