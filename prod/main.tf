@@ -5,5 +5,5 @@ module "prod" {
     network_prefix = "10.0"
   }
   asg_min = 1
-  asg_max = 10
+  asg_max = 3
 }
