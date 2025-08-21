@@ -1,14 +1,11 @@
 output "db_endpoint" {
-  description = "Database connection endpoint"
-  value       = aws_db_instance.database.endpoint
+  value = module.database.db_endpoint
 }
 
 output "db_port" {
-  description = "Database port"
-  value       = aws_db_instance.database.port
+  value = module.database.db_port
 }
 
 output "db_name" {
-  description = "Database name"
-  value       = aws_db_instance.database.db_name
+  value = module.database.db_name
 }

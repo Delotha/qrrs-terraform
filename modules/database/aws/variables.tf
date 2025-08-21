@@ -16,21 +16,19 @@ variable "subnet_ids" {
   type        = list(string)
 }
 
-variable "db" {
+variable "db_aws" {
   description = "Database configuration"
   type = object({
-    engine        = string
-    version       = string
-    port          = number
-    name          = string
-    username      = string
+    instance_size = string
+    min_size      = number
+    max_size      = number
+    storage_type  = string
   })
   default = {
-    engine        = "postgres"
-    version       = "17"
-    port          = 5432
-    name          = "qrrsdb"
-    username      = "qrrsadmin"
+    instance_size = "db.t4g.micro"
+    min_size      = 20
+    max_size      = 100
+    storage_type  = "gp3"
   }
 }
 
