@@ -1,3 +1,11 @@
+variable "environment" {
+  description = "Deployment environment object"
+  type = object({
+    name           = string
+    network_prefix = string
+  })
+}
+
 variable "vpc_id" {
   description = "ID of the VPC where the DB will be deployed"
   type        = string
