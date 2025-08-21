@@ -1,4 +1,4 @@
 module "provider_network" {
-  source      = "./providers/${var.cloud_provider}"
-  environment = var.environment
+  source      = "./providers/aws"
+  # Change to the appropriate provider: aws, azure, gcp, oracle
 }
