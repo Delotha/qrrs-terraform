@@ -38,7 +38,7 @@ resource "aws_db_subnet_group" "db_subnet" {
 resource "aws_db_instance" "postgres" {
   identifier             = "${var.environment.name}-postgres"
   engine                 = "postgres"
-  engine_version         = vvar.db_version
+  engine_version         = var.db_version
   instance_class         = "db.t4g.micro"    # cheapest option
   allocated_storage      = 20
   max_allocated_storage  = 100
