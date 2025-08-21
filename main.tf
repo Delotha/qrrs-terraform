@@ -1,9 +1,18 @@
-module "qrrs" {
-  source = "./modules/qrrs"
+module "network" {
+  source           = "./modules/network"
   environment = {
-    name = "qrrs"
+    name           = "qrrs"
     network_prefix = "10.0"
   }
-  asg_min = 1
-  asg_max = 3
+}
+
+module "database" {
+  source      = "./modules/database"
+  environment = {
+    name           = "qrrs"
+    network_prefix = "10.0"
+  }
+  vpc_id      = module.network.vpc_id
+  subnet_ids  = module.network.public_subnets
+  db_password = var.db_password
 }
