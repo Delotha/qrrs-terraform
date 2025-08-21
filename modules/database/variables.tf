@@ -16,56 +16,31 @@ variable "subnet_ids" {
   type        = list(string)
 }
 
-variable "db_version" {
-  description = "Database version to use"
-  type        = string
-  default     = "17"
-}
-
-variable "db_engine" {
-  description = "Database type"
-  type        = string
-  default     = "postgres"
-}
-
-variable "db_port" {
-  description = "Database name"
-  type        = number
-  default     = 5432
-}
-
-variable "db_instance_size" {
-  description = "Database instance size"
-  type        = string
-  default     = "db.t4g.micro"
-}
-
-variable "db_min_size" {
-  description = "Minimum DB size"
-  type        = number
-  default     = 20
-}
-
-variable "db_max_size" {
-  description = "Maximum database size"
-  type        = number
-  default     = 100
-}
-
-variable "db_username" {
-  description = "Username for the database"
-  type        = string
-  default     = "qrrsadmin"
-}
-
-variable "db_password" {
-  description = "Password for the database"
-  type        = string
-  sensitive   = true
-}
-
-variable "db_name" {
-  description = "Database name"
-  type        = string
-  default     = "qrrsdb"
+variable "db" {
+  description = "Database configuration"
+  type = object({
+    engine        = string
+    version       = string
+    port          = number
+    instance_size = string
+    min_size      = number
+    max_size      = number
+    storage_type  = string
+    name          = string
+    username      = string
+    password      = string
+  })
+  default = {
+    engine        = "postgres"
+    version       = "17"
+    port          = 5432
+    instance_size = "db.t4g.micro"
+    min_size      = 20
+    max_size      = 100
+    storage_type  = "gp3"
+    name          = "qrrsdb"
+    username      = "qrrsadmin"
+    password      = var.db_password
+    # Currently getting password from /main.tf
+  }
 }

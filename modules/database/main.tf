@@ -36,18 +36,18 @@ resource "aws_db_subnet_group" "db_subnet" {
 
 # RDS Database Instance
 resource "aws_db_instance" "database" {
-  identifier             = "${var.environment.name}-${var.db_engine}"
-  engine                 = var.db_engine
-  engine_version         = var.db_version
-  instance_class         = var.db_instance_size
-  allocated_storage      = var.db_min_size
-  max_allocated_storage  = var.db_max_size
-  storage_type           = "gp3"
+  identifier             = "${var.environment.name}-${var.db.engine}"
+  engine                 = var.db.engine
+  engine_version         = var.db.version
+  instance_class         = var.db.instance_size
+  allocated_storage      = var.db.min_size
+  max_allocated_storage  = var.db.max_size
+  storage_type           = var.db.storage_type
 
-  db_name                = var.db_name
-  username               = var.db_username
-  password               = var.db_password
-  port                   = var.db_port
+  db_name                = var.db.name
+  username               = var.db.username
+  password               = var.db.password
+  port                   = var.db.port
 
   vpc_security_group_ids = [aws_security_group.db_sg.id]
   db_subnet_group_name   = aws_db_subnet_group.db_subnet.name
@@ -56,6 +56,6 @@ resource "aws_db_instance" "database" {
   publicly_accessible    = true   # for testing; set false for prod
 
   tags = {
-    Name = "${var.environment.name}-${var.db_engine}"
+    Name = "${var.environment.name}-${var.db.engine}"
   }
 }
