@@ -1,5 +1,5 @@
 module "network" {
-  source           = "./modules/network"
+  source = "./modules/network"
   environment = {
     name           = "qrrs"
     network_prefix = "10.0"

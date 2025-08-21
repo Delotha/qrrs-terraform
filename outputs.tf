@@ -1,18 +1,14 @@
-output "environment_url" {
-  value = module.prod.environment_url
-}
-
 output "db_endpoint" {
-  description = "PostgreSQL connection endpoint"
-  value       = aws_db_instance.postgres.endpoint
+  description = "PostgreSQL connection endpoint from the database module"
+  value       = module.database.db_endpoint
 }
 
 output "db_port" {
-  description = "Database port"
-  value       = aws_db_instance.postgres.port
+  description = "PostgreSQL port from the database module"
+  value       = module.database.db_port
 }
 
 output "db_name" {
-  description = "Database name"
-  value       = aws_db_instance.postgres.db_name
+  description = "Database name from the database module"
+  value       = module.database.db_name
 }
