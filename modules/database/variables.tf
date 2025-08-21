@@ -16,12 +16,6 @@ variable "subnet_ids" {
   type        = list(string)
 }
 
-variable "db_password" {
-  description = "Password for the PostgreSQL database"
-  type        = string
-  sensitive   = true
-}
-
 variable "db_username" {
   description = "Username for the PostgreSQL database"
   type        = string
