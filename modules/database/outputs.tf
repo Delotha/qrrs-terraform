@@ -12,3 +12,8 @@ output "db_name" {
   description = "Database name"
   value       = aws_db_instance.postgres.db_name
 }
+
+output "db_password" {
+  description = "Database password"
+  value       = aws_db_instance.postgres.db_password
+}
