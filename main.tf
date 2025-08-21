@@ -15,13 +15,13 @@ module "network" {
 }
 
 # Database module
-module "database" {
-  source      = "./modules/database"
-  environment = {
-    name           = var.environment_name
-    network_prefix = var.network_prefix
-  }
-  vpc_id      = module.network.vpc_id
-  subnet_ids  = module.network.public_subnets
-  db_password = random_password.db.result
-}
+# module "database" {
+#   source      = "./modules/database"
+#   environment = {
+#     name           = var.environment_name
+#     network_prefix = var.network_prefix
+#   }
+#   vpc_id      = module.network.vpc_id
+#   subnet_ids  = module.network.public_subnets
+#   db_password = random_password.db.result
+# }
