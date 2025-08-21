@@ -1,7 +1,7 @@
 variable "environment" {
   description = "Deployment environment"
 
-  type        = object ({
+  type = object ({
     name           = string
     network_prefix = string
   })

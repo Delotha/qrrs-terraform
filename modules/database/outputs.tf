@@ -1,5 +1,5 @@
 output "db_endpoint" {
-  description = "PostgreSQL connection endpoint"
+  description = "Database connection endpoint"
   value       = aws_db_instance.postgres.endpoint
 }
 
