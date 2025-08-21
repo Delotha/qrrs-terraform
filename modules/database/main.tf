@@ -1,3 +1,9 @@
+variable "app_sg_ids" {
+  description = "List of security group IDs allowed to access the DB"
+  type        = list(string)
+  default     = []
+}
+
 # Security group for the database
 resource "aws_security_group" "db_sg" {
   name        = "${var.environment.name}-db-sg"
@@ -5,11 +11,11 @@ resource "aws_security_group" "db_sg" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description = "Database access from VPC"
-    from_port   = var.db_port
-    to_port     = var.db_port
-    protocol    = "tcp"
-    cidr_blocks = ["${var.environment.network_prefix}.0.0/16"]
+    description     = "Database access from VPC"
+    from_port       = var.db.port
+    to_port         = var.db.port
+    protocol        = "tcp"
+    security_groups = var.app_sg_ids
   }
 
   egress {
@@ -36,7 +42,7 @@ resource "aws_db_subnet_group" "db_subnet" {
 
 # RDS Database Instance
 resource "aws_db_instance" "database" {
-  identifier             = "${var.environment.name}-${var.db.engine}"
+  identifier             = "${var.environment.name}-${var.db.name}"
   engine                 = var.db.engine
   engine_version         = var.db.version
   instance_class         = var.db.instance_size
@@ -46,16 +52,17 @@ resource "aws_db_instance" "database" {
 
   db_name                = var.db.name
   username               = var.db.username
-  password               = var.db.password
+  password               = var.db_password
   port                   = var.db.port
 
   vpc_security_group_ids = [aws_security_group.db_sg.id]
   db_subnet_group_name   = aws_db_subnet_group.db_subnet.name
 
-  skip_final_snapshot    = true   # dev/testing only
-  publicly_accessible    = true   # for testing; set false for prod
+  skip_final_snapshot    = var.environment.name == "dev" ? true : false
+  publicly_accessible    = var.environment.name == "dev" ? true : false
+  deletion_protection    = var.environment.name == "prod" ? true : false
 
   tags = {
-    Name = "${var.environment.name}-${var.db.engine}"
+    Name = "${var.environment.name}-${var.db.name}"
   }
 }

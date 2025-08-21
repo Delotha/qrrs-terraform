@@ -28,7 +28,6 @@ variable "db" {
     storage_type  = string
     name          = string
     username      = string
-    password      = string
   })
   default = {
     engine        = "postgres"
@@ -40,7 +39,5 @@ variable "db" {
     storage_type  = "gp3"
     name          = "qrrsdb"
     username      = "qrrsadmin"
-    password      = var.db_password
-    # Currently getting password from /main.tf
   }
 }

@@ -6,7 +6,7 @@ variable "environment" {
     network_prefix = string
   })
   default = {
-    name           = "prod"
+    name           = "dev"
     network_prefix = "10.0"
   }
 }
