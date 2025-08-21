@@ -16,6 +16,12 @@ variable "subnet_ids" {
   type        = list(string)
 }
 
+variable "db_version" {
+  description = "PostgreSQL version to use"
+  type        = string
+  default     = "17"
+}
+
 variable "db_username" {
   description = "Username for the PostgreSQL database"
   type        = string
