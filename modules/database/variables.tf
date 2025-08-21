@@ -41,3 +41,9 @@ variable "db" {
     username      = "qrrsadmin"
   }
 }
+
+variable "db_password" { # Passed in from root
+  description = "Password for the database"
+  type        = string
+  sensitive   = true
+}
