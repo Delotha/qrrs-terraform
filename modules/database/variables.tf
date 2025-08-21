@@ -1,11 +1,3 @@
-variable "environment" {
-  description = "Deployment environment"
-  type = object({
-    name           = string
-    network_prefix = string
-  })
-}
-
 variable "vpc_id" {
   description = "ID of the VPC where the DB will be deployed"
   type        = string
@@ -20,6 +12,12 @@ variable "db_username" {
   description = "Username for the PostgreSQL database"
   type        = string
   default     = "qrrsadmin"
+}
+
+variable "db_password" {
+  description = "Password for the PostgreSQL database"
+  type        = string
+  sensitive   = true
 }
 
 variable "db_name" {
