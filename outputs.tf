@@ -12,8 +12,3 @@ output "db_name" {
   description = "Database name from the database module"
   value       = module.database.db_name
 }
-
-output "db_password" {
-  description = "Database password from the database module"
-  value       = module.database.db_password
-}
