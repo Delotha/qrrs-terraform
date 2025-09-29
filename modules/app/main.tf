@@ -1,3 +1,20 @@
+# Get latest ECS-optimized Amazon Linux 2 AMI
+data "aws_ami" "ecs_optimized" {
+	most_recent = true
+	owners      = ["amazon"]
+	filter {
+		name   = "name"
+		values = ["amzn2-ami-ecs-hvm-*-x86_64-ebs"]
+	}
+	filter {
+		name   = "architecture"
+		values = ["x86_64"]
+	}
+	filter {
+		name   = "root-device-type"
+		values = ["ebs"]
+	}
+}
 # ECS Cluster
 resource "aws_ecs_cluster" "app" {
 	name = "qcrs-app-cluster"
@@ -61,7 +78,7 @@ resource "aws_ecs_service" "app" {
 
 # EC2 Instance for ECS Cluster (Free Tier eligible t2.micro)
 resource "aws_instance" "ecs" {
-	ami           = var.ecs_ami_id
+	ami           = data.aws_ami.ecs_optimized.id
 	instance_type = "t2.micro"
 	iam_instance_profile = aws_iam_instance_profile.ecs_instance_profile.name
 	user_data     = <<EOF
