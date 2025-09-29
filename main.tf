@@ -29,7 +29,7 @@ module "network" {
 # App module
 module "app" {
   source          = "./modules/app"
-  subnets         = module.network.module.provider_network.module.qrrs_vpc.public_subnets
+  subnets         = module.network.public_subnets
   security_groups = [] # Add security group IDs here if needed
   ecs_ami_id      = "ami-0b2f6494ff0b07a0e" # Example ECS-optimized Amazon Linux 2 AMI (update as needed)
 }
