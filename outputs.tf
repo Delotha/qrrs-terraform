@@ -13,3 +13,8 @@
 #   description = "Database name from the database module"
 #   value       = module.database.db_name
 # }
+
+output "app_url" {
+	description = "Public URL to access the app"
+	value       = "http://${module.app.ec2_public_dns}"
+}
